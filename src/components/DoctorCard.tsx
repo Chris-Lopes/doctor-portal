@@ -1,6 +1,9 @@
 import Image from "next/image";
-import { StarIcon } from "@heroicons/react/20/solid";
+import { Star } from "lucide-react";
 import type { Doctor } from "@/lib/supabase";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 interface DoctorCardProps {
   doctor: Doctor;
@@ -8,60 +11,69 @@ interface DoctorCardProps {
 
 export default function DoctorCard({ doctor }: DoctorCardProps) {
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 mb-4">
-      <div className="flex items-start space-x-4">
-        <div className="relative h-24 w-24 flex-shrink-0">
-          <Image
-            src={doctor.image_url || "/default-doctor.png"}
-            alt={doctor.name}
-            fill
-            className="rounded-full object-cover"
-          />
-        </div>
+    <Card className="w-full">
+      <CardContent className="p-6">
+        <div className="flex items-start space-x-4">
+          <div className="relative h-24 w-24 flex-shrink-0">
+            <Image
+              src={doctor.image_url || "/default-doctor.png"}
+              alt={doctor.name}
+              fill
+              className="rounded-full object-cover"
+            />
+          </div>
 
-        <div className="flex-1">
-          <h3 className="text-lg font-semibold text-gray-900">{doctor.name}</h3>
-          <p className="text-sm text-gray-600">{doctor.specialty}</p>
-
-          <div className="mt-2 flex items-center">
-            <div className="flex items-center">
-              {[...Array(5)].map((_, i) => (
-                <StarIcon
-                  key={i}
-                  className={`h-4 w-4 ${
-                    i < (doctor.rating || 0)
-                      ? "text-yellow-400"
-                      : "text-gray-300"
-                  }`}
-                />
-              ))}
+          <div className="flex-1">
+            <div className="flex items-start justify-between">
+              <div>
+                <h3 className="text-lg font-semibold text-foreground">
+                  {doctor.name}
+                </h3>
+                <Badge variant="secondary" className="mt-1">
+                  {doctor.specialty}
+                </Badge>
+              </div>
+              <div className="flex items-center">
+                {[...Array(5)].map((_, i) => (
+                  <Star
+                    key={i}
+                    className={`h-4 w-4 ${
+                      i < (doctor.rating || 0)
+                        ? "fill-yellow-400 text-yellow-400"
+                        : "fill-gray-200 text-gray-200"
+                    }`}
+                  />
+                ))}
+                <span className="ml-2 text-sm text-muted-foreground">
+                  ({doctor.total_reviews} reviews)
+                </span>
+              </div>
             </div>
-            <span className="ml-2 text-sm text-gray-600">
-              ({doctor.total_reviews} reviews)
-            </span>
-          </div>
 
-          <div className="mt-2">
-            <p className="text-sm text-gray-600">
-              {doctor.experience_years} years experience
-            </p>
-            <p className="text-sm text-gray-600">{doctor.qualification}</p>
-          </div>
-
-          <div className="mt-4 flex items-center justify-between">
-            <div>
-              <p className="text-sm text-gray-600">Consultation Fee</p>
-              <p className="text-lg font-semibold text-blue-600">
-                ₹{doctor.consultation_fee}
+            <div className="mt-4 space-y-2">
+              <p className="text-sm text-muted-foreground">
+                {doctor.experience_years} years experience
+              </p>
+              <p className="text-sm text-muted-foreground">
+                {doctor.qualification}
               </p>
             </div>
 
-            <button className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700">
-              Book Now
-            </button>
+            <div className="mt-6 flex items-center justify-between">
+              <div>
+                <p className="text-sm text-muted-foreground">
+                  Consultation Fee
+                </p>
+                <p className="text-lg font-semibold text-primary">
+                  ₹{doctor.consultation_fee}
+                </p>
+              </div>
+
+              <Button>Book Now</Button>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 }

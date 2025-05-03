@@ -1,42 +1,37 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default function Header() {
   return (
-    <header className="bg-white shadow-md">
+    <header className="border-b bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Link href="/" className="flex-shrink-0">
-              <Image
-                src="/logo.png"
-                alt="Doctor Portal"
-                width={120}
-                height={40}
-                className="h-8 w-auto"
-              />
+              <span className="text-xl font-bold">Doctor Portal</span>
             </Link>
           </div>
 
           <nav className="hidden md:flex space-x-8">
             <Link
-              href="/doctors"
-              className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+              href="/specialties"
+              className="text-muted-foreground hover:text-foreground px-3 py-2 rounded-md text-sm font-medium"
             >
               Find Doctors
             </Link>
             <Link
-              href="/specialties"
-              className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+              href="/add-doctor"
+              className="text-muted-foreground hover:text-foreground px-3 py-2 rounded-md text-sm font-medium"
             >
-              Specialties
+              Add Doctor
             </Link>
           </nav>
 
           <div className="flex items-center space-x-4">
-            <button className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700">
-              Book Appointment
-            </button>
+            <Button asChild>
+              <Link href="/specialties">View All Doctors</Link>
+            </Button>
           </div>
         </div>
       </div>

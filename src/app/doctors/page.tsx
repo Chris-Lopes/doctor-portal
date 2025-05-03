@@ -6,15 +6,9 @@ import DoctorListingClient from "@/components/DoctorListingClient";
 import { supabase } from "@/lib/supabase";
 
 export const metadata: Metadata = {
-  title: "General Physician & Internal Medicine Specialists | Doctor Portal",
+  title: "All Doctors | Doctor Portal",
   description:
-    "Find and book appointments with the best General Physicians and Internal Medicine specialists. View doctor profiles, ratings, and consultation fees.",
-  openGraph: {
-    title: "General Physician & Internal Medicine Specialists | Doctor Portal",
-    description:
-      "Find and book appointments with the best General Physicians and Internal Medicine specialists. View doctor profiles, ratings, and consultation fees.",
-    type: "website",
-  },
+    "Find and book appointments with our qualified doctors. View doctor profiles, ratings, and consultation fees.",
 };
 
 async function getDoctors(searchParams: {
@@ -30,10 +24,9 @@ async function getDoctors(searchParams: {
 
   let query = supabase.from("doctors").select("*", { count: "exact" });
 
+  // Only apply specialty filter if specifically requested
   if (specialty) {
     query = query.eq("specialty", specialty);
-  } else {
-    query = query.in("specialty", ["General Physician", "Internal Medicine"]);
   }
 
   if (minFee) {
@@ -84,9 +77,7 @@ export default async function DoctorsPage({
 
           <div className="md:w-3/4">
             <div className="mb-6">
-              <h1 className="text-2xl font-bold text-gray-900">
-                General Physician & Internal Medicine Specialists
-              </h1>
+              <h1 className="text-2xl font-bold text-gray-900">All Doctors</h1>
               <p className="mt-2 text-sm text-gray-600">
                 {total} doctors available
               </p>
