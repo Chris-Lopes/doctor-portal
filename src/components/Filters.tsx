@@ -139,12 +139,12 @@ export default function Filters({ onFilterChange }: FiltersProps) {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-lg font-semibold mb-4">Sort By</h2>
+        <h2 className="text-base font-semibold mb-3">Sort By</h2>
         <Select
           value={`${filters.sortBy}:${filters.sortOrder}`}
           onValueChange={handleSortChange}
         >
-          <SelectTrigger>
+          <SelectTrigger className="w-full">
             <SelectValue placeholder="Select sorting option" />
           </SelectTrigger>
           <SelectContent>
@@ -157,7 +157,7 @@ export default function Filters({ onFilterChange }: FiltersProps) {
         </Select>
       </div>
 
-      <div className="w-full max-w-md space-y-4">
+      <div className="space-y-4">
         <Accordion
           type="multiple"
           defaultValue={[
@@ -167,13 +167,13 @@ export default function Filters({ onFilterChange }: FiltersProps) {
             "language",
             "facility",
           ]}
-          className="space-y-4"
+          className="space-y-2"
         >
-          <AccordionItem value="consultation">
-            <AccordionTrigger className="text-base">
+          <AccordionItem value="consultation" className="border-b">
+            <AccordionTrigger className="py-3 hover:no-underline hover:bg-gray-50">
               Mode of Consult
             </AccordionTrigger>
-            <AccordionContent>
+            <AccordionContent className="pt-1 pb-3">
               <div className="space-y-2">
                 {CONSULTATION_MODES.map((mode) => (
                   <div key={mode} className="flex items-center space-x-3">
@@ -184,7 +184,7 @@ export default function Filters({ onFilterChange }: FiltersProps) {
                     />
                     <Label
                       htmlFor={`mode-${mode}`}
-                      className="text-sm font-normal leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      className="text-sm font-normal cursor-pointer"
                     >
                       {mode}
                     </Label>
@@ -194,11 +194,11 @@ export default function Filters({ onFilterChange }: FiltersProps) {
             </AccordionContent>
           </AccordionItem>
 
-          <AccordionItem value="experience">
-            <AccordionTrigger className="text-base">
+          <AccordionItem value="experience" className="border-b">
+            <AccordionTrigger className="py-3 hover:no-underline hover:bg-gray-50">
               Experience (In Years)
             </AccordionTrigger>
-            <AccordionContent>
+            <AccordionContent className="pt-1 pb-3">
               <div className="space-y-2">
                 {EXPERIENCE_RANGES.map((range) => (
                   <div
@@ -216,7 +216,7 @@ export default function Filters({ onFilterChange }: FiltersProps) {
                     />
                     <Label
                       htmlFor={`exp-${range.label}`}
-                      className="text-sm font-normal leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      className="text-sm font-normal cursor-pointer"
                     >
                       {range.label}
                     </Label>
@@ -226,11 +226,11 @@ export default function Filters({ onFilterChange }: FiltersProps) {
             </AccordionContent>
           </AccordionItem>
 
-          <AccordionItem value="fee">
-            <AccordionTrigger className="text-base">
+          <AccordionItem value="fee" className="border-b">
+            <AccordionTrigger className="py-3 hover:no-underline hover:bg-gray-50">
               Fees (In Rupees)
             </AccordionTrigger>
-            <AccordionContent>
+            <AccordionContent className="pt-1 pb-3">
               <div className="space-y-2">
                 {FEE_RANGES.map((range) => (
                   <div
@@ -248,7 +248,7 @@ export default function Filters({ onFilterChange }: FiltersProps) {
                     />
                     <Label
                       htmlFor={`fee-${range.label}`}
-                      className="text-sm font-normal leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      className="text-sm font-normal cursor-pointer"
                     >
                       {range.label}
                     </Label>
@@ -258,9 +258,11 @@ export default function Filters({ onFilterChange }: FiltersProps) {
             </AccordionContent>
           </AccordionItem>
 
-          <AccordionItem value="language">
-            <AccordionTrigger className="text-base">Language</AccordionTrigger>
-            <AccordionContent>
+          <AccordionItem value="language" className="border-b">
+            <AccordionTrigger className="py-3 hover:no-underline hover:bg-gray-50">
+              Language
+            </AccordionTrigger>
+            <AccordionContent className="pt-1 pb-3">
               <div className="grid grid-cols-2 gap-2">
                 {LANGUAGES.map((language) => (
                   <div key={language} className="flex items-center space-x-3">
@@ -271,7 +273,7 @@ export default function Filters({ onFilterChange }: FiltersProps) {
                     />
                     <Label
                       htmlFor={`lang-${language}`}
-                      className="text-sm font-normal leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      className="text-sm font-normal cursor-pointer"
                     >
                       {language}
                     </Label>
@@ -281,9 +283,11 @@ export default function Filters({ onFilterChange }: FiltersProps) {
             </AccordionContent>
           </AccordionItem>
 
-          <AccordionItem value="facility">
-            <AccordionTrigger className="text-base">Facility</AccordionTrigger>
-            <AccordionContent>
+          <AccordionItem value="facility" className="border-b">
+            <AccordionTrigger className="py-3 hover:no-underline hover:bg-gray-50">
+              Facility
+            </AccordionTrigger>
+            <AccordionContent className="pt-1 pb-3">
               <div className="space-y-2">
                 {FACILITY_TYPES.map((facility) => (
                   <div key={facility} className="flex items-center space-x-3">
@@ -294,7 +298,7 @@ export default function Filters({ onFilterChange }: FiltersProps) {
                     />
                     <Label
                       htmlFor={`facility-${facility}`}
-                      className="text-sm font-normal leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      className="text-sm font-normal cursor-pointer"
                     >
                       {facility}
                     </Label>

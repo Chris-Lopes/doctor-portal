@@ -164,13 +164,15 @@ export default function AddDoctor() {
   };
 
   return (
-    <div className="container mx-auto py-8">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <div className="container mx-auto px-4 sm:px-6 py-4 sm:py-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-8">
         <div>
-          <h1 className="text-2xl font-bold mb-6">Add New Doctor</h1>
-          <form onSubmit={handleSubmit} className="space-y-8">
+          <h1 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">
+            Add New Doctor
+          </h1>
+          <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-8">
             {/* Basic Information Section */}
-            <div className="bg-white p-6 rounded-lg shadow-sm border">
+            <div className="bg-white p-4 sm:p-6 rounded-lg shadow-sm border">
               <h2 className="text-lg font-semibold mb-4">Basic Information</h2>
               <div className="space-y-4">
                 <div className="space-y-2">
@@ -182,6 +184,7 @@ export default function AddDoctor() {
                     onChange={handleChange}
                     required
                     placeholder="Dr. John Doe"
+                    className="text-sm sm:text-base"
                   />
                 </div>
 
@@ -193,18 +196,22 @@ export default function AddDoctor() {
                       handleSelectChange(value, "specialty")
                     }
                   >
-                    <SelectTrigger>
+                    <SelectTrigger className="text-sm sm:text-base">
                       <SelectValue placeholder="Select specialty" />
                     </SelectTrigger>
                     <SelectContent>
                       {SPECIALTIES.map((spec) => (
-                        <SelectItem key={spec} value={spec}>
+                        <SelectItem
+                          key={spec}
+                          value={spec}
+                          className="text-sm sm:text-base"
+                        >
                           {spec}
                         </SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-xs sm:text-sm text-muted-foreground">
                     Choose the primary area of expertise
                   </p>
                 </div>
@@ -227,7 +234,7 @@ export default function AddDoctor() {
             </div>
 
             {/* Professional Details Section */}
-            <div className="bg-white p-6 rounded-lg shadow-sm border">
+            <div className="bg-white p-4 sm:p-6 rounded-lg shadow-sm border">
               <h2 className="text-lg font-semibold mb-4">
                 Professional Details
               </h2>
@@ -289,14 +296,14 @@ export default function AddDoctor() {
             </div>
 
             {/* Consultation Details Section */}
-            <div className="bg-white p-6 rounded-lg shadow-sm border">
+            <div className="bg-white p-4 sm:p-6 rounded-lg shadow-sm border">
               <h2 className="text-lg font-semibold mb-4">
                 Consultation Details
               </h2>
               <div className="space-y-4">
                 <div className="space-y-2">
                   <Label>Consultation Modes</Label>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
                     {CONSULTATION_MODES.map((mode) => (
                       <Button
                         key={mode}
@@ -309,20 +316,20 @@ export default function AddDoctor() {
                         onClick={() =>
                           handleMultiSelectChange(mode, "consultation_modes")
                         }
-                        className="h-8"
+                        className="h-7 sm:h-8 text-xs sm:text-sm"
                       >
                         {mode}
                       </Button>
                     ))}
                   </div>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-xs sm:text-sm text-muted-foreground">
                     Select all applicable consultation modes
                   </p>
                 </div>
 
                 <div className="space-y-2">
                   <Label>Languages Spoken</Label>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
                     {LANGUAGES.map((lang) => (
                       <Button
                         key={lang}
@@ -335,13 +342,13 @@ export default function AddDoctor() {
                         onClick={() =>
                           handleMultiSelectChange(lang, "languages")
                         }
-                        className="h-8"
+                        className="h-7 sm:h-8 text-xs sm:text-sm"
                       >
                         {lang}
                       </Button>
                     ))}
                   </div>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-xs sm:text-sm text-muted-foreground">
                     Select all languages the doctor can communicate in
                   </p>
                 </div>
@@ -349,7 +356,7 @@ export default function AddDoctor() {
             </div>
 
             {/* Profile Image Section */}
-            <div className="bg-white p-6 rounded-lg shadow-sm border">
+            <div className="bg-white p-4 sm:p-6 rounded-lg shadow-sm border">
               <h2 className="text-lg font-semibold mb-4">Profile Image</h2>
               <div className="space-y-4">
                 <div className="space-y-2">
@@ -395,10 +402,10 @@ export default function AddDoctor() {
         </div>
 
         {/* Preview Section */}
-        <div className="lg:sticky lg:top-8">
-          <h2 className="text-lg font-semibold mb-4">Preview</h2>
-          <div className="bg-white p-6 rounded-lg shadow-sm border">
-            <p className="text-sm text-muted-foreground mb-4">
+        <div className="mt-8 lg:mt-0 lg:sticky lg:top-8">
+          <h2 className="text-lg font-semibold mb-2 sm:mb-4">Preview</h2>
+          <div className="bg-white p-4 sm:p-6 rounded-lg shadow-sm border">
+            <p className="text-xs sm:text-sm text-muted-foreground mb-4">
               This is how the doctor's profile will appear to users
             </p>
             <DoctorCard doctor={previewData} />

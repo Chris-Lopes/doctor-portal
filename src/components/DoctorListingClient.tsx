@@ -1,8 +1,10 @@
 "use client";
 
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Filters from "./Filters";
+import { Button } from "@/components/ui/button";
+import { SlidersHorizontal, X } from "lucide-react";
 
 interface FilterState {
   consultationModes: string[];
@@ -17,6 +19,7 @@ interface FilterState {
 export default function DoctorListingClient() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const createQueryString = useCallback(
     (filters: FilterState) => {
@@ -78,5 +81,32 @@ export default function DoctorListingClient() {
     router.push(queryString);
   };
 
-  return <Filters onFilterChange={handleFilterChange} />;
+  return (
+    <div className="p-4">
+      <div className="flex items-center justify-between lg:hidden mb-4">
+        <h2 className="text-base font-semibold">Filters</h2>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => setIsFilterOpen(!isFilterOpen)}
+          className="flex items-center gap-2"
+        >
+          {isFilterOpen ? (
+            <>
+              <X className="h-4 w-4" />
+              Hide
+            </>
+          ) : (
+            <>
+              <SlidersHorizontal className="h-4 w-4" />
+              Show
+            </>
+          )}
+        </Button>
+      </div>
+      <div className={`${isFilterOpen ? "block" : "hidden"} lg:block`}>
+        <Filters onFilterChange={handleFilterChange} />
+      </div>
+    </div>
+  );
 }

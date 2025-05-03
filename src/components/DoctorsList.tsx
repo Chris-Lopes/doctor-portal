@@ -86,17 +86,17 @@ export default function DoctorsList() {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-4 sm:space-y-8">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">
+        <h1 className="text-xl sm:text-2xl font-bold text-gray-900">
           General Physician & Internal Medicine Specialists
         </h1>
-        <p className="mt-2 text-sm text-gray-600">
+        <p className="mt-1 sm:mt-2 text-sm text-gray-600">
           {total} doctor{total !== 1 ? "s" : ""} available
         </p>
       </div>
 
-      <div className="space-y-6">
+      <div className="space-y-4 sm:space-y-6">
         {doctors.map((doctor) => (
           <DoctorCard key={doctor.id} doctor={doctor} />
         ))}
