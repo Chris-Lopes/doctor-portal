@@ -1,12 +1,26 @@
 import { NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
+import type { ConsultationMode, Language, FacilityType } from "@/lib/supabase";
+
+type TransformedData = {
+  name: string;
+  specialty: string;
+  experience_years: number;
+  consultation_fee: number;
+  qualification: string;
+  languages: Language[];
+  consultation_modes: ConsultationMode[];
+  facility_type: FacilityType;
+  image_url: string | null;
+  [key: string]: string | number | string[] | null;
+};
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
 
     // Transform and validate the data
-    const transformedData = {
+    const transformedData: TransformedData = {
       name: body.name,
       specialty: body.specialty,
       experience_years: parseInt(body.experience_years),
@@ -94,7 +108,7 @@ export async function POST(request: Request) {
 
     const validConsultationModes = ["Hospital Visit", "Online Consult"];
     const invalidModes = transformedData.consultation_modes.filter(
-      (mode) => !validConsultationModes.includes(mode)
+      (mode: string) => !validConsultationModes.includes(mode)
     );
     if (invalidModes.length > 0) {
       return NextResponse.json(
@@ -119,7 +133,7 @@ export async function POST(request: Request) {
       "Assamese",
     ];
     const invalidLanguages = transformedData.languages.filter(
-      (lang) => !validLanguages.includes(lang)
+      (lang: string) => !validLanguages.includes(lang)
     );
     if (invalidLanguages.length > 0) {
       return NextResponse.json(

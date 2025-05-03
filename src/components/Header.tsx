@@ -27,12 +27,6 @@ export default function Header() {
               Add Doctor
             </Link>
           </nav>
-
-          <div className="flex items-center space-x-4">
-            <Button asChild>
-              <Link href="/specialties">View All Doctors</Link>
-            </Button>
-          </div>
         </div>
       </div>
     </header>
